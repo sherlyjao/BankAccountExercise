@@ -18,11 +18,15 @@ public class BankAccount {
     }
 
     public void withdraw(double amount) {
-        if (!isFrozen && amount > 0 && amount <= balance) {
-            this.balance -= amount;
-        } 
+        if (!isFrozen && amount > 0) {
+            if (amount > this.balance) {
+                System.out.println("Insufficient balance.");
+            } else {
+                this.balance -= amount;
+            }
+        }
     }
-    
+        
     public void freezeAccount() {
         this.isFrozen = true;
     }
