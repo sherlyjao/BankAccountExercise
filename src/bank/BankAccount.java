@@ -1,8 +1,10 @@
 package bank;
 
+/**
+ * Bank Account.
+ */
 public class BankAccount {
     private double balance;
-
     public boolean isFrozen;
     public String invalidAmountMessage = "Invalid amount. Must be greater than 0";
     public String inssufficientBalanceMessage = "Insufficient balance.";
@@ -17,7 +19,6 @@ public class BankAccount {
         System.out.printf("Current balance: %.2f%n", this.getBalance());
     }
 
-
     // constructor
     public BankAccount() {
         this.balance = 0.00;
@@ -26,9 +27,6 @@ public class BankAccount {
 
     // methods
     public void deposit(double amount) {
-        // if (!isFrozen && amount > 0) {
-        // this.balance += amount;
-        // }
         String actionText = "deposited";
 
         if (isFrozen) {
@@ -44,14 +42,6 @@ public class BankAccount {
     }
 
     public void withdraw(double amount) {
-        // if (!isFrozen && amount > 0) {
-        // if (amount > this.balance) {
-        // System.out.println(inssufficientBalanceMessage);
-        // } else {
-        // this.balance -= amount;
-        // }
-        // }
-
         String actionText = "withdrawn";
 
         if (isFrozen) {

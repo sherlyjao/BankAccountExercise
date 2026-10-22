@@ -1,7 +1,15 @@
 import bank.BankAccount;
 import bank.SavingsAccount;
 
+/**
+ App.
+*/
 public class App {
+    /**
+     * 
+     * @param args
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
 
         //==== TEST CASES ====

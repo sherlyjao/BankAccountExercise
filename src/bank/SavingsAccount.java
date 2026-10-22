@@ -1,5 +1,8 @@
 package bank;
 
+/**
+    SavingsAccount.
+ */
 public class SavingsAccount extends BankAccount {
     private String ownerName;
 
