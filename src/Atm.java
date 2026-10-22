@@ -1,14 +1,17 @@
 
-import java.util.Scanner;
 import bank.BankAccount;
 import bank.SavingsAccount;
+import java.util.Scanner;
 
+/**
+ * Runs the command-line ATM interface for a sample bank account.
+ */
 public class Atm {
     public boolean isRunning = true;
     private final Scanner scanner = new Scanner(System.in);
     private BankAccount acc1;
 
-    // initial account for test
+    /** Sets up the initial sample account for testing. */
     public void setDummyAccount() {
         acc1 = new SavingsAccount("Test0");
 
@@ -20,8 +23,10 @@ public class Atm {
         System.out.println();
     }
 
+    /** Displays the available ATM actions. */
     public void actionList() {
-        System.out.println("Actions: (1) Deposit (2) Withdraw (3) " + (acc1.isFrozen() ? "Unfreeze" : "Freeze")
+        System.out.println("Actions: (1) Deposit (2) Withdraw (3) "
+                + (acc1.isFrozen() ? "Unfreeze" : "Freeze")
                 + " (4) Check Balance (5) Exit");
         System.out.println("--------------------------------");
     }
@@ -31,6 +36,9 @@ public class Atm {
         return scanner.nextDouble();
     }
 
+    /**
+     * Atm Action.
+     */
     public void atmAction() {
         while (isRunning) {
             actionList();
@@ -87,6 +95,11 @@ public class Atm {
         scanner.close();
     }
 
+    /**
+     * 
+     * @param args
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
         // set Dummy Account
         Atm atm = new Atm();

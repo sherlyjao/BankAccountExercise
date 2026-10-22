@@ -25,7 +25,10 @@ public class BankAccount {
         this.isFrozen = false;
     }
 
-    // methods
+    /**
+     * 
+     * @param amount
+     */
     public void deposit(double amount) {
         String actionText = "deposited";
 

@@ -6,9 +6,10 @@ import bank.SavingsAccount;
 */
 public class App {
     /**
-     * 
-     * @param args
-     * @throws Exception
+     * Runs bank account test cases.
+     *
+     * @param args command-line arguments
+     * @throws Exception if an error occurs during a bank account operation
      */
     public static void main(String[] args) throws Exception {
 
