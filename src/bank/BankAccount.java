@@ -9,10 +9,15 @@ public class BankAccount {
     public String accountStatusMessage = "Account is " + (isFrozen ? "FROZEN" : "UNFROZEN") + ". Unable to transact.";
 
     // print results
-    public void printResult(double amount, String action) {
+    public void printAction(double amount, String action) {
         System.out.printf("Amount " + action + ": %.2f%n", amount);
+    }
+
+    public void printBalance() {
         System.out.printf("Current balance: %.2f%n", this.getBalance());
     }
+
+
 
     // constructor
     public BankAccount() {
@@ -29,10 +34,12 @@ public class BankAccount {
         if (isFrozen) {
             System.out.println(accountStatusMessage);
         } else if (amount <= 0) {
+            printAction(amount, "deposited");
             System.out.println(invalidAmountMessage);
         } else {
             this.balance += amount;
-            printResult(amount, "deposited");
+            printAction(amount, "deposited");
+            printBalance();
         }
     }
 
@@ -51,7 +58,7 @@ public class BankAccount {
             System.out.println(inssufficientBalanceMessage);
         } else {
             this.balance -= amount;
-            printResult(amount, "withdrawn");
+            printAction(amount, "withdrawn");
         }
     }
 
