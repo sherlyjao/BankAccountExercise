@@ -6,7 +6,7 @@ public class BankAccount {
     public boolean isFrozen;
     public String invalidAmountMessage = "Invalid amount. Must be greater than 0";
     public String inssufficientBalanceMessage = "Insufficient balance.";
-    public String accountStatusMessage = "Account is " + (isFrozen ? "FROZEN" : "UNFROZEN") + ". Unable to transact.";
+    public String accountStatusMessage = "Account is " + (isFrozen ? "UNFROZEN" : "FROZEN") + ". Unable to transact.";
 
     // print results
     public void printAction(double amount, String action) {
@@ -16,7 +16,6 @@ public class BankAccount {
     public void printBalance() {
         System.out.printf("Current balance: %.2f%n", this.getBalance());
     }
-
 
 
     // constructor
@@ -55,21 +54,25 @@ public class BankAccount {
         if (isFrozen) {
             System.out.println(accountStatusMessage);
         } else if (amount > this.balance) {
+            printAction(amount, "withdrawn");
             System.out.println(inssufficientBalanceMessage);
+            printBalance();
+        } else if (amount <= 0) {
+            printAction(amount, "withdrawn");
+            System.out.println(invalidAmountMessage);
         } else {
             this.balance -= amount;
             printAction(amount, "withdrawn");
+            printBalance();
         }
     }
 
     public void freezeAccount() {
         this.isFrozen = true;
-        System.out.println("Account is now FROZEN.");
     }
 
     public void unfreezeAccount() {
         this.isFrozen = false;
-        System.out.println("Account is now UNFROZEN.");
     }
 
     // getters
