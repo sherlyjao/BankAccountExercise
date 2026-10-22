@@ -29,15 +29,16 @@ public class BankAccount {
         // if (!isFrozen && amount > 0) {
         // this.balance += amount;
         // }
+        String actionText = "deposited";
 
         if (isFrozen) {
             System.out.println(accountStatusMessage);
         } else if (amount <= 0) {
-            printAction(amount, "deposited");
+            printAction(amount, actionText);
             System.out.println(invalidAmountMessage);
         } else {
             this.balance += amount;
-            printAction(amount, "deposited");
+            printAction(amount, actionText);
             printBalance();
         }
     }
@@ -51,18 +52,20 @@ public class BankAccount {
         // }
         // }
 
+        String actionText = "withdrawn";
+
         if (isFrozen) {
             System.out.println(accountStatusMessage);
         } else if (amount > this.balance) {
-            printAction(amount, "withdrawn");
+            printAction(amount, actionText);
             System.out.println(inssufficientBalanceMessage);
             printBalance();
         } else if (amount <= 0) {
-            printAction(amount, "withdrawn");
+            printAction(amount, actionText);
             System.out.println(invalidAmountMessage);
         } else {
             this.balance -= amount;
-            printAction(amount, "withdrawn");
+            printAction(amount, actionText);
             printBalance();
         }
     }
