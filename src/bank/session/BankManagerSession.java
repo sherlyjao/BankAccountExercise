@@ -1,9 +1,13 @@
 package bank.session;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
+import bank.BankAccount;
 import bank.BankAccountManager;
 import bank.SavingsAccount;
+import bank.Transaction;
 
 public class BankManagerSession {
     private final Scanner scanner;
@@ -15,8 +19,68 @@ public class BankManagerSession {
     }
 
     public void displayManagerActionList() {
-        System.out.println("\nActions: \n(1) Create Account\n(2) List All Accounts\n(3) Logout");
+        System.out.println("\nActions: \n(1) Create Account\n(2) List All Accounts\n(3) See Transaction Hisoty\n(4) Logout");
         System.out.println("--------------------------------");
+    }
+
+    public void displayTransactionActionList() {
+        System.out.println("\nTransaction Options: \n(1) Normal (Show all)\n(2) Fil\n(3) Logout");
+        System.out.println("--------------------------------");
+    }
+
+    public void handleTransactionDisplay() {
+        System.out.println("Enter Account ID to view transactions (-1 to cancel): ");
+        int accountId = scanner.nextInt();
+
+        if (accountId == -1) {
+            return;
+        }
+
+        BankAccount account = accountManager.getAccount(accountId);
+
+        if (account == null) {
+            System.out.println("Account does not exist!");
+            return;
+        }
+
+        List<Transaction> transactions = account.getTransactionHistory();
+
+        if (transactions.isEmpty()) {
+            System.out.println("No transactions found in this account.");
+            return;
+        }
+
+        displayTransactionActionList();
+        System.out.print("Choose transaction action: ");
+        int transactionAction = scanner.nextInt();
+        System.out.println();
+
+        switch (transactionAction) {
+            case 1:
+                transactions.forEach(transaction -> System.out.println(transaction));
+                break;
+        
+            case 2:
+                System.out.print("Enter minimum amount to filter: ");
+                double minimumAmount = scanner.nextDouble();
+
+                List<Transaction> filteredList = accountManager.filterTransactionsAtOrAbove(minimumAmount, transactions);
+
+                if (filteredList.isEmpty()) {
+                    System.out.println("No transactions met this criteria.");
+                } else {
+                    filteredList.forEach(filteredItem -> System.out.println(filteredItem));
+                }
+
+            case 3:
+                List<Transaction> sortedList = accountManager.sortTransactionsByAmount(new ArrayList<>(transactions));
+
+                sortedList.forEach(sortedItem -> System.out.println(sortedItem));
+
+                break;
+            default:
+                break;
+        }
     }
 
     public void start() {
@@ -43,6 +107,10 @@ public class BankManagerSession {
                     break;
 
                 case 3:
+                    handleTransactionDisplay();
+                    break;
+
+                case 4:
                     isManagerSession = false;
                     System.out.println("Logged out from Manager Mode.\n");
                     break;

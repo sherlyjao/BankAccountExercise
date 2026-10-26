@@ -94,7 +94,6 @@ public class BankAccount {
     return this.transactionHistory;
   }
 
-  // print results
   public void printAction(double amount, String action) {
     System.out.printf("Amount " + action + ": %.2f%n", amount);
   }
