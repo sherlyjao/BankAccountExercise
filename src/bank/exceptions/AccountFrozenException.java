@@ -3,7 +3,7 @@ package bank.exceptions;
 /**
  * Thrown when an operation cannot be performed on a frozen bank account.
  */
-public class AccountFrozenException {
+public class AccountFrozenException extends Exception {
   private String message;
 
   public AccountFrozenException(String message) {
