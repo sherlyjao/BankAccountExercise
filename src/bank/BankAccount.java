@@ -31,7 +31,7 @@ public class BankAccount {
    public void deposit(double amount) {
        String actionText = "Deposit";
        
-       if (isFrozen) {
+       if (this.isFrozen()) {
            System.out.println(ACCOUNT_STATUS_MESSAGE);
            
         } else if (amount <= 0) {
@@ -50,7 +50,7 @@ public class BankAccount {
     public void withdraw(double amount) {
         String actionText = "Withdraw";
 
-        if (isFrozen) {
+        if (this.isFrozen()) {
             System.out.println(ACCOUNT_STATUS_MESSAGE);
             
         } else if (amount > this.balance) {
