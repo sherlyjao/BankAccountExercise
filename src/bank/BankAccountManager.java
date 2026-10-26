@@ -3,7 +3,7 @@ package bank;
 import java.util.HashMap;
 
 public class BankAccountManager implements Bank {
-    HashMap<Integer, BankAccount> accounts;
+    private HashMap<Integer, BankAccount> accounts;
     private int id;
 
     public BankAccountManager() {
