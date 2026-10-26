@@ -46,6 +46,11 @@ public class Atm {
         return scanner.nextDouble();
     }
 
+    /**
+     * Displays the transaction history of an account.
+     *
+     * @param account the account whose transaction history is displayed
+     */
     public void displayTransactionHistory(BankAccount account) {
         if (account.getTransactionHistory().isEmpty()) {
             System.out.println("[Transaction\n[]]");

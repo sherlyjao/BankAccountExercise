@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Bank Account.
+ * Bank Account class.
  */
 public class BankAccount {
     private double balance;
