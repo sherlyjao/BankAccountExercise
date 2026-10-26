@@ -9,14 +9,17 @@ import java.util.List;
 public class BankAccount {
     private double balance;
     private boolean isFrozen;
+    
+    private List<Transaction> transactionHistory;
 
     private String INVALID_AMOUNT_MESSAGE = "Invalid amount. Must be greater than 0";
     private String INSUFFICIENT_BALANCE_MESSAGE = "Insufficient balance.";
-    private String ACCOUNT_STATUS_MESSAGE = "Account is " + (this.isFrozen() ? "UNFROZEN" : "FROZEN") + ". Unable to transact.";
 
-    private List<Transaction> transactionHistory;
+    public String accountStatusMessage() {
+        return "Account is " + (this.isFrozen() ? "UNFROZEN" : "FROZEN") + ". Unable to transact.";
+    };
 
-    
+
     // constructor
     public BankAccount() {
         this.balance = 0.00;
@@ -32,7 +35,7 @@ public class BankAccount {
        String actionText = "Deposit";
        
        if (this.isFrozen()) {
-           System.out.println(ACCOUNT_STATUS_MESSAGE);
+           System.out.println(accountStatusMessage());
            return;
            
         }
@@ -54,7 +57,7 @@ public class BankAccount {
         String actionText = "Withdraw";
 
         if (this.isFrozen()) {
-            System.out.println(ACCOUNT_STATUS_MESSAGE);
+            System.out.println(accountStatusMessage());
             return;
             
         } 
