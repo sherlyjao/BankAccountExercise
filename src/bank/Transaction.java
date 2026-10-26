@@ -18,8 +18,8 @@ public class Transaction {
 
     public String toString() {
         return 
-            "type=" + this.type + 
+            "[type=" + this.type + 
             ",\namount=" + this.amount + 
-            ",\ntime_stamp=" + this.time_stamp;
+            ",\ntime_stamp=" + this.time_stamp + "]";
     }
 }

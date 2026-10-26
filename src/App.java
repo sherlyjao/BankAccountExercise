@@ -1,5 +1,7 @@
 import bank.BankAccount;
+import bank.BankAccountManager;
 import bank.SavingsAccount;
+import bank.Transaction;
 
 /**
  App.
@@ -13,7 +15,7 @@ public class App {
      */
     public static void main(String[] args) throws Exception {
 
-        //==== TEST CASES ====
+        //==== TEST CASES Exercise 1 ====
         //1. Create a savings account
         System.out.println();
         BankAccount acc1 = new SavingsAccount("Test0");
@@ -56,6 +58,31 @@ public class App {
         System.out.println();
         acc1.unfreezeAccount();
         acc1.withdraw(100);
+
+        //==== TEST CASES Exercise 2 ====
+        //> Create a savings account
+        // System.out.println();
+        // BankAccount acc1 = new SavingsAccount("Test0");
+        // System.out.println("Sample Account: " + ((SavingsAccount) acc1).getOwnerName());
+
+        //1. Display transaction historu of acc1.
+        System.out.println("[Transaction");
+        for (Transaction t : acc1.getTransactionHistory()) {
+            System.out.println(t);
+        }
+        System.out.println("]");
+
+        //2. Create a Bank Account Manager
+        BankAccountManager accM1 = new BankAccountManager();
+
+        //3. Add acc1 under the bankAccount Manager
+        accM1.addAccount(acc1);
+
+        //4. Create a new account under Bank Account Manager
+        accM1.addAccount(new SavingsAccount("Test1"));
+
+        //5. List all the created account under Bank Account Manager
+        accM1.listAccounts();
 
         System.out.println();
     }

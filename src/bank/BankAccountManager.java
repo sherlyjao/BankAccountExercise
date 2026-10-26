@@ -14,6 +14,8 @@ public class BankAccountManager implements Bank {
     public void addAccount(BankAccount account) {
         if (this.id <= 100) {
             this.accounts.put(id, account);
+            System.out.println("Account added successfully with ID: " + this.id);
+
             this.id += 1;
         } else {
             System.out.println("Bank is full!");
@@ -26,10 +28,12 @@ public class BankAccountManager implements Bank {
 
     public void listAccounts() {
         accounts.forEach((id, account) -> {
-            System.out.println(
-                "Account ID: " + id + 
-                ", Account Name: " + ((SavingsAccount) account).getOwnerName() +
-                ", Balance: " + account.getBalance());
+            String ownerName = (account instanceof SavingsAccount)
+                    ? ((SavingsAccount) account).getOwnerName()
+                    : "N/A";
+
+            System.out.printf("Account ID: %s, Account Name: %s, Balance: %.2f%n",
+                    id, ownerName, account.getBalance());
         });
     }
 }
