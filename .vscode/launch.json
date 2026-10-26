@@ -9,6 +9,13 @@
             "name": "Atm",
             "request": "launch",
             "mainClass": "Atm",
+            "projectName": "BankAccountExercise_6dbfebda"
+        },
+        {
+            "type": "java",
+            "name": "Atm",
+            "request": "launch",
+            "mainClass": "Atm",
             "projectName": "BankAccountExercise_8d30eafa"
         }
     ]
