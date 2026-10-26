@@ -22,4 +22,8 @@ public class Transaction {
             ",\namount=" + this.amount + 
             ",\ntime_stamp=" + this.time_stamp + "]";
     }
+
+    public double getAmount() {
+        return amount;
+    }
 }

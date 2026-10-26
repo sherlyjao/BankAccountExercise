@@ -1,39 +1,73 @@
 package bank;
 
 import java.util.HashMap;
+import java.util.List;
 
+/**
+ * Manages the bank accounts stored by the bank.
+ */
 public class BankAccountManager implements Bank {
-    private HashMap<Integer, BankAccount> accounts;
-    private int id;
+  private HashMap<Integer, BankAccount> accounts;
+  private int id;
 
-    public BankAccountManager() {
-        this.accounts = new HashMap<>();
-        this.id = 0;
+  /**
+   * Constructs a new {@code BankAccountManager} with no accounts and an initial ID of zero.
+   */
+  public BankAccountManager() {
+    this.accounts = new HashMap<>();
+    this.id = 0;
+  }
+
+  /**
+   * Adds an account to the bank.
+   *
+   * @param account the account to add
+   */
+  public void addAccount(BankAccount account) {
+    if (this.id <= 100) {
+      this.accounts.put(id, account);
+      System.out.println("Account added successfully with ID: " + this.id);
+
+      this.id += 1;
+    } else {
+      System.out.println("Bank is full!");
     }
+  }
 
-    public void addAccount(BankAccount account) {
-        if (this.id <= 100) {
-            this.accounts.put(id, account);
-            System.out.println("Account added successfully with ID: " + this.id);
+  /**
+   * Retrieves an account by its ID.
+   *
+   * @param id the account ID
+   * @return the matching account, or {@code null} if no account has that ID
+   */
+  public BankAccount getAccount(int id) {
+    return accounts.get(id);
+  }
 
-            this.id += 1;
-        } else {
-            System.out.println("Bank is full!");
-        }
-    }
+  /**
+   * Lists all accounts managed by the bank.
+   */
+  public void listAccounts() {
+    accounts.forEach((id, account) -> {
+      String ownerName = (account instanceof SavingsAccount)
+          ? ((SavingsAccount) account).getOwnerName()
+          : "N/A";
 
-    public BankAccount getAccount(int id) {
-        return accounts.get(id);
-    }
+      System.out.printf("Account ID: %s, Account Name: %s, Balance: %.2f%n",
+          id, ownerName, account.getBalance());
+    });
+  }
 
-    public void listAccounts() {
-        accounts.forEach((id, account) -> {
-            String ownerName = (account instanceof SavingsAccount)
-                    ? ((SavingsAccount) account).getOwnerName()
-                    : "N/A";
+  public List<Transaction> filterTransactionsAtOrAbove(double amount, List<Transaction> txList) {
+    return txList
+        .stream()
+        .filter(transaction -> transaction.getAmount() >= amount)
+        .collect(java.util.stream.Collectors.toList());
+  }
 
-            System.out.printf("Account ID: %s, Account Name: %s, Balance: %.2f%n",
-                    id, ownerName, account.getBalance());
-        });
-    }
+  public List<Transaction> sortTransactionsByAmount(List<Transaction> txList) {
+    txList.sort((transaction1, transaction2) ->
+        Double.compare(transaction1.getAmount(), transaction2.getAmount()));
+    return txList;
+  }
 }
