@@ -33,8 +33,11 @@ public class BankAccount {
        
        if (this.isFrozen()) {
            System.out.println(ACCOUNT_STATUS_MESSAGE);
+           return;
            
-        } else if (amount <= 0) {
+        }
+        
+        if (amount <= 0) {
             printAction(amount, actionText);
             System.out.println(INVALID_AMOUNT_MESSAGE);
             
@@ -52,8 +55,11 @@ public class BankAccount {
 
         if (this.isFrozen()) {
             System.out.println(ACCOUNT_STATUS_MESSAGE);
+            return;
             
-        } else if (amount > this.balance) {
+        } 
+        
+        if (amount > this.balance) {
             printAction(amount, actionText);
             System.out.println(INSUFFICIENT_BALANCE_MESSAGE);
             printBalance();
