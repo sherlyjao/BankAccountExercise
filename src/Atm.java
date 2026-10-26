@@ -127,16 +127,16 @@ public class Atm {
 
             switch (action) {
                 case 1:
-                    double depositAmount = userActionInput("deposit");
+                    // double depositAmount = userActionInput("deposit");
                     System.out.println();
-                    account.deposit(depositAmount);
+                    // account.deposit(depositAmount);
 
                     break;
 
                 case 2:
                     double withdrawAmount = userActionInput("withdrawal");
                     System.out.println();
-                    account.withdraw(withdrawAmount);
+                    // account.withdraw(withdrawAmount);
 
                     break;
 

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bank.exceptions.AccountFrozenException;
+import bank.exceptions.InsufficientFundsException;
+import bank.exceptions.InvalidAmountException;
 
 /**
  * Bank Account class.
@@ -46,59 +48,46 @@ public class BankAccount {
     }
   }
 
+  public void checkValidAmount(double amount) throws InvalidAmountException {
+    if (amount <= 0) 
+      throw new InvalidAmountException(INVALID_AMOUNT_MESSAGE);
+  }
+
+  public void checkSufficientFunds(double amount) throws InsufficientFundsException {
+    if (amount > this.balance) {
+      throw new InsufficientFundsException(INSUFFICIENT_BALANCE_MESSAGE);
+    }
+  }
+
   /**
    * 
    * @param amount
    */
-  public void deposit(double amount) throws AccountFrozenException {
+  public void deposit(double amount) throws AccountFrozenException, InvalidAmountException {
     String actionText = "Deposit";
 
-    // if (this.isFrozen()) {
-    // System.out.println(accountStatusMessage());
-    // return;
-
-    // }
-
     checkStatus();
+    checkValidAmount(amount);
 
-    if (amount <= 0) {
-      printAction(amount, actionText);
-      System.out.println(INVALID_AMOUNT_MESSAGE);
+    this.balance += amount;
+    this.transactionHistory.add(new Transaction(actionText, amount));
 
-    } else {
-      this.balance += amount;
-      this.transactionHistory.add(new Transaction(actionText, amount));
-
-      printAction(amount, actionText);
-      printBalance();
-    }
+    printAction(amount, actionText);
+    printBalance();
   }
 
-  public void withdraw(double amount) {
+  public void withdraw(double amount) throws AccountFrozenException, InvalidAmountException, InsufficientFundsException {
     String actionText = "Withdraw";
 
-    // if (this.isFrozen()) {
-    // System.out.println(accountStatusMessage());
-    // return;
+    checkStatus();
+    checkValidAmount(amount);
+    checkSufficientFunds(amount);
 
-    // }
+    this.balance -= amount;
+    this.transactionHistory.add(new Transaction(actionText, amount));
 
-    if (amount > this.balance) {
-      printAction(amount, actionText);
-      System.out.println(INSUFFICIENT_BALANCE_MESSAGE);
-      printBalance();
-
-    } else if (amount <= 0) {
-      printAction(amount, actionText);
-      System.out.println(INVALID_AMOUNT_MESSAGE);
-
-    } else {
-      this.balance -= amount;
-      this.transactionHistory.add(new Transaction(actionText, amount));
-
-      printAction(amount, actionText);
-      printBalance();
-    }
+    printAction(amount, actionText);
+    printBalance();
   }
 
   public List<Transaction> getTransactionHistory() {
