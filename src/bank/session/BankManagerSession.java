@@ -19,12 +19,12 @@ public class BankManagerSession {
     }
 
     public void displayManagerActionList() {
-        System.out.println("\nActions: \n(1) Create Account\n(2) List All Accounts\n(3) See Transaction Hisoty\n(4) Logout");
+        System.out.println("\nActions: (1) Create Account (2) List All Accounts (3) See Transaction History (4) Logout");
         System.out.println("--------------------------------");
     }
 
     public void displayTransactionActionList() {
-        System.out.println("\nTransaction Options: \n(1) Normal (Show all)\n(2) Fil\n(3) Logout");
+        System.out.println("\nTransaction Options:  (1) Normal (Show all) (2) Filter at or above minimum amount) (3) Sort by amount ascending (4) Logout");
         System.out.println("--------------------------------");
     }
 
@@ -74,11 +74,15 @@ public class BankManagerSession {
 
             case 3:
                 List<Transaction> sortedList = accountManager.sortTransactionsByAmount(new ArrayList<>(transactions));
-
                 sortedList.forEach(sortedItem -> System.out.println(sortedItem));
-
                 break;
+
+            case 4:
+                System.out.println("Cancelled viewing transactions.");
+                break;
+
             default:
+                System.out.println("\nInvalid action. Please try again.");
                 break;
         }
     }
