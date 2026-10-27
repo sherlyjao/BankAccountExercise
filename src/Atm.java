@@ -16,9 +16,14 @@ public class Atm {
     private final BankAccountManager accM1 = new BankAccountManager();
 
     /** Sets up the initial sample account for testing. */
-    public void setDummyAccount() {
-        BankAccount acc1 = new SavingsAccount("Test0");
-        accM1.addAccount(acc1);
+    // public void setDummyAccount() {
+    //     BankAccount acc1 = new SavingsAccount("Test0");
+    //     accM1.addAccount(acc1);
+    // }
+
+    public void setDummyAccount() throws Exception {
+           TestCase testCase = new TestCase();
+           testCase.runDummyTestCase(this.accM1);
     }
 
     public void start() {

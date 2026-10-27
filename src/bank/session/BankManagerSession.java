@@ -78,7 +78,7 @@ public class BankManagerSession {
                 break;
 
             case 4:
-                System.out.println("Cancelled viewing transactions.");
+                System.out.println("\nCancelled viewing transactions.");
                 break;
 
             default:
