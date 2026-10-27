@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 public class BankAccountManager implements Bank {
   private HashMap<Integer, BankAccount> accounts;
   private int id;
+  private int MAX_ACCOUNT = 100;
 
   /**
    * Constructs a new {@code BankAccountManager} with no accounts and an initial ID of zero.
@@ -26,7 +27,7 @@ public class BankAccountManager implements Bank {
    * @param account the account to add
    */
   public void addAccount(BankAccount account) {
-    if (this.id <= 100) {
+    if (this.id <= MAX_ACCOUNT) {
       this.accounts.put(id, account);
       System.out.println("Account added successfully with ID: " + this.id);
 
@@ -64,7 +65,7 @@ public class BankAccountManager implements Bank {
     double amount, 
     List<Transaction> txList
   ) {
-    
+
     return txList
         .stream()
         .filter(transaction -> transaction.getAmount() >= amount)
