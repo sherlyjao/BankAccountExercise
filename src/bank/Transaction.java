@@ -4,9 +4,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Transaction {
-    /**
-     * Fields
-     */
     private String type;
     private double amount;
     private LocalDateTime time_stamp;

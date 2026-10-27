@@ -1,7 +1,9 @@
 package bank;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Manages the bank accounts stored by the bank.
@@ -58,7 +60,11 @@ public class BankAccountManager implements Bank {
     });
   }
 
-  public List<Transaction> filterTransactionsAtOrAbove(double amount, List<Transaction> txList) {
+  public List<Transaction> filterTransactionsAtOrAbove(
+    double amount, 
+    List<Transaction> txList
+  ) {
+    
     return txList
         .stream()
         .filter(transaction -> transaction.getAmount() >= amount)
@@ -66,8 +72,9 @@ public class BankAccountManager implements Bank {
   }
 
   public List<Transaction> sortTransactionsByAmount(List<Transaction> txList) {
-    txList.sort((transaction1, transaction2) ->
-        Double.compare(transaction1.getAmount(), transaction2.getAmount()));
-    return txList;
+    return txList.stream()
+      .filter(transaction -> transaction != null)
+      .sorted(Comparator.comparingDouble(Transaction::getAmount))
+      .collect(Collectors.toList());
   }
 }

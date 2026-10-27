@@ -1,4 +1,5 @@
 package bank.ui;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -8,12 +9,12 @@ public class UiUtils {
 
     public static void printHeader(String title) {
         System.out.println();
-        System.out.println(DIVIDER_MAJOR 
-                + "\n" 
-                + title 
-                + "\n" 
+        System.out.println(DIVIDER_MAJOR
+                + "\n"
+                + title
+                + "\n"
                 + DIVIDER_MAJOR);
-                
+
         System.out.println();
     }
 
@@ -41,14 +42,22 @@ public class UiUtils {
         while (true) {
             try {
                 System.out.print(prompt);
-                int value = scanner.nextInt();
-                scanner.nextLine(); 
-                return value;
-            } catch (InputMismatchException e) {
+                String value = scanner.nextLine().trim();
+
+                if (value.isEmpty()) {
+                    throw new IllegalArgumentException("Input can not be empty.\n");
+                }
+
+
+                return Integer.parseInt(value);
+
+            } catch (NumberFormatException e) {
                 System.out.println("[Error] Invalid input. "
-                    + "Please enter a whole number.");
-                scanner.nextLine(); 
+                        + "Please enter a whole number.");
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
             }
+
         }
     }
 
@@ -56,13 +65,37 @@ public class UiUtils {
         while (true) {
             try {
                 System.out.print(prompt);
-                double value = scanner.nextDouble();
-                scanner.nextLine(); 
-                return value;
-            } catch (InputMismatchException e) {
+                String value = scanner.nextLine().trim();
+
+                if (value.isEmpty()) {
+                    throw new IllegalArgumentException("Input can not be empty.\n");
+                }
+
+                return Double.parseDouble(value);
+            } catch (NumberFormatException e) {
                 System.out.println("[Error] Invalid input. Please enter a valid decimal number.");
-                scanner.nextLine(); 
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
             }
+
+        }
+    }
+
+    public static String getStringInput(Scanner scanner, String prompt) {
+        while (true) {
+            try {
+                System.out.print(prompt);
+                String value = scanner.nextLine().trim();
+
+                if (value.isEmpty()) {
+                    throw new IllegalArgumentException("Input can not be empty.\n");
+                }
+
+                return value;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+
         }
     }
 }

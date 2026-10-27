@@ -3,7 +3,6 @@ package bank.session;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
 import bank.BankAccount;
 import bank.BankAccountManager;
 import bank.SavingsAccount;
@@ -115,8 +114,7 @@ public class BankManagerSession {
                 case 1:
                     scanner.nextLine();
 
-                    System.out.print("Enter owner name: ");
-                    String ownerName = scanner.nextLine();
+                    String ownerName = UiUtils.getStringInput(scanner, "Enter owner name: ");
                     accountManager.addAccount(new SavingsAccount(ownerName));
                     break;
             
