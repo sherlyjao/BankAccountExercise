@@ -1,7 +1,6 @@
 package bank.session;
 
 import java.util.Scanner;
-
 import bank.BankAccount;
 import bank.SavingsAccount;
 import bank.Transaction;
