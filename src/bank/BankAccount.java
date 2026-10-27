@@ -48,12 +48,16 @@ public class BankAccount {
     }
   }
 
-  public void checkValidAmount(double amount) throws InvalidAmountException {
+  public void checkValidAmount(double amount) throws 
+    InvalidAmountException {
+      
     if (amount <= 0) 
       throw new InvalidAmountException(INVALID_AMOUNT_MESSAGE);
   }
 
-  public void checkSufficientFunds(double amount) throws InsufficientFundsException {
+  public void checkSufficientFunds(double amount) throws 
+    InsufficientFundsException {
+
     if (amount > this.balance) {
       throw new InsufficientFundsException(INSUFFICIENT_BALANCE_MESSAGE);
     }
@@ -76,7 +80,11 @@ public class BankAccount {
     printBalance();
   }
 
-  public void withdraw(double amount) throws AccountFrozenException, InvalidAmountException, InsufficientFundsException {
+  public void withdraw(double amount) throws 
+    AccountFrozenException, 
+    InvalidAmountException, 
+    InsufficientFundsException {
+
     String actionText = "Withdraw";
 
     checkStatus();

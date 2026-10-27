@@ -83,13 +83,15 @@ public class BankManagerSession {
                     filteredList.forEach(filteredItem -> System.out.println(filteredItem));
                 }
 
+                break;
+
             case 3:
                 List<Transaction> sortedList = accountManager
                     .sortTransactionsByAmount(new ArrayList<>(transactions));
                 sortedList.forEach(
                     sortedItem -> System.out.println(sortedItem)
                 );
-                
+
                 break;
 
             case 4:

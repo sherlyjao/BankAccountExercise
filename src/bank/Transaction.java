@@ -19,8 +19,8 @@ public class Transaction {
     public String toString() {
         return 
             "[type=" + this.type + 
-            ",\namount=" + this.amount + 
-            ",\ntime_stamp=" + this.time_stamp + "]";
+            ", amount=" + this.amount + 
+            ", time_stamp=" + this.time_stamp + "]";
     }
 
     public double getAmount() {
