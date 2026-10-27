@@ -4,24 +4,14 @@ import bank.BankAccountManager;
 import bank.session.BankManagerSession;
 import bank.session.UserAtmSession;
 import bank.ui.UiUtils;
-
 import java.util.Scanner;
 
-/**
- * Runs the command-line ATM interface for a sample bank account.
- */
 public class App {
     public boolean isRunning = true;
     private final Scanner scanner = new Scanner(System.in);
     private final BankAccountManager accM1 = new BankAccountManager();
 
-    /** Sets up the initial sample account for testing. */
-    // public void setDummyAccount() {
-    //     BankAccount acc1 = new SavingsAccount("Test0");
-    //     accM1.addAccount(acc1);
-    // }
-
-    /** Loads the sample account used for testing. */
+    // Setting up dummy account Test0 with test cases
     public void setDummyAccount() throws Exception {
         TestCase testCase = new TestCase();
         testCase.runDummyTestCase(this.accM1);
