@@ -1,16 +1,16 @@
 
 import bank.BankAccount;
 import bank.BankAccountManager;
-import bank.SavingsAccount;
 import bank.session.BankManagerSession;
 import bank.session.UserAtmSession;
+import bank.ui.UiUtils;
 
 import java.util.Scanner;
 
 /**
  * Runs the command-line ATM interface for a sample bank account.
  */
-public class Atm {
+public class App {
     public boolean isRunning = true;
     private final Scanner scanner = new Scanner(System.in);
     private final BankAccountManager accM1 = new BankAccountManager();
@@ -27,17 +27,17 @@ public class Atm {
     }
 
     public void start() {
+        UiUtils.printHeader("Welcome to Surely Bank!");
+
         while (isRunning) {
-            System.out.println("================================");
-            System.out.println("Welcome to Surely Bank!");
-            System.out.println("================================");
+            UiUtils.printDivider();
+            System.out.println("Actions: "
+                + "(1) User ATM mode "
+                + "(2) Bank Manager mode "
+                + "(3) Exit program");
+            UiUtils.printDivider();
 
-            System.out.println("Actions: \n(1) User ATM mode\n(2) Bank Manager mode\n(3) Exit program");
-            System.out.println("--------------------------------");
-
-            System.out.print("Enter action: ");
-            int action = scanner.nextInt();
-            System.out.println();
+            int action = UiUtils.getIntInput(scanner, "Enter action: ");
 
             switch (action) {
                 case 1:
@@ -50,17 +50,14 @@ public class Atm {
 
                 case 3:
                     isRunning = false;
-                    System.out.println("\nThank you for visiting Surely Bank!");
+                    UiUtils.printExitProgram();
                     break;
 
                 default:
-                    System.out.println("\nInvalid action. Please try again.");
+                    UiUtils.printInvalidAction();
                     break;
             }
         }
-        System.out.println("================================");
-        System.out.println();
-
         scanner.close();
     }
 
@@ -68,14 +65,12 @@ public class Atm {
      * Atm Action.
      */
     public void userAtmMode() {
-        System.out.print("Enter Account ID: ");
-        int accountId = scanner.nextInt();
-        scanner.nextLine();
+        int accountId = UiUtils.getIntInput(scanner, "Enter Account ID: ");
 
         BankAccount account = accM1.getAccount(accountId);
 
         if (account == null) {
-            System.out.println("Account not found!\n");
+            UiUtils.printAccountNotFound();
             return;
         }
 
@@ -95,7 +90,7 @@ public class Atm {
      */
     public static void main(String[] args) throws Exception {
         // set Dummy Account
-        Atm atm = new Atm();
+        App atm = new App();
         atm.setDummyAccount();
 
         // run atm

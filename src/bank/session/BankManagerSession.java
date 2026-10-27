@@ -8,6 +8,7 @@ import bank.BankAccount;
 import bank.BankAccountManager;
 import bank.SavingsAccount;
 import bank.Transaction;
+import bank.ui.UiUtils;
 
 public class BankManagerSession {
     private final Scanner scanner;
@@ -19,18 +20,26 @@ public class BankManagerSession {
     }
 
     public void displayManagerActionList() {
-        System.out.println("\nActions: (1) Create Account (2) List All Accounts (3) See Transaction History (4) Logout");
-        System.out.println("--------------------------------");
+        System.out.println("\nActions: "
+            + "(1) Create Account "
+            + "(2) List All Accounts "
+            + "(3) See Transaction History "
+            + "(4) Logout");
+        UiUtils.printDivider();
     }
 
     public void displayTransactionActionList() {
-        System.out.println("\nTransaction Options:  (1) Normal (Show all) (2) Filter at or above minimum amount) (3) Sort by amount ascending (4) Logout");
-        System.out.println("--------------------------------");
+        System.out.println("\nTransaction Options: "
+            + "(1) Normal (Show all) " 
+            + "(2) Filter at or above minimum amount) "
+            + "(3) Sort by amount ascending "
+            + "(4) Logout");
+        UiUtils.printDivider();
     }
 
     public void handleTransactionDisplay() {
-        System.out.println("Enter Account ID to view transactions (-1 to cancel): ");
-        int accountId = scanner.nextInt();
+        int accountId = UiUtils.getIntInput(scanner, 
+                "Enter Account ID to view transactions (-1 to cancel): ");
 
         if (accountId == -1) {
             return;
@@ -39,7 +48,7 @@ public class BankManagerSession {
         BankAccount account = accountManager.getAccount(accountId);
 
         if (account == null) {
-            System.out.println("Account does not exist!");
+            UiUtils.printAccountNotFound();
             return;
         }
 
@@ -51,9 +60,10 @@ public class BankManagerSession {
         }
 
         displayTransactionActionList();
-        System.out.print("Choose transaction action: ");
-        int transactionAction = scanner.nextInt();
-        System.out.println();
+        int transactionAction = UiUtils.getIntInput(scanner, 
+                "Choose transaction action: ");
+
+        UiUtils.printDivider();
 
         switch (transactionAction) {
             case 1:
@@ -61,10 +71,11 @@ public class BankManagerSession {
                 break;
         
             case 2:
-                System.out.print("Enter minimum amount to filter: ");
-                double minimumAmount = scanner.nextDouble();
+                double minimumAmount = UiUtils.getDoubleInput(scanner, 
+                        "Enter minimum amount to filter: ");
 
-                List<Transaction> filteredList = accountManager.filterTransactionsAtOrAbove(minimumAmount, transactions);
+                List<Transaction> filteredList = 
+                    accountManager.filterTransactionsAtOrAbove(minimumAmount, transactions);
 
                 if (filteredList.isEmpty()) {
                     System.out.println("No transactions met this criteria.");
@@ -73,8 +84,12 @@ public class BankManagerSession {
                 }
 
             case 3:
-                List<Transaction> sortedList = accountManager.sortTransactionsByAmount(new ArrayList<>(transactions));
-                sortedList.forEach(sortedItem -> System.out.println(sortedItem));
+                List<Transaction> sortedList = accountManager
+                    .sortTransactionsByAmount(new ArrayList<>(transactions));
+                sortedList.forEach(
+                    sortedItem -> System.out.println(sortedItem)
+                );
+                
                 break;
 
             case 4:
@@ -82,7 +97,7 @@ public class BankManagerSession {
                 break;
 
             default:
-                System.out.println("\nInvalid action. Please try again.");
+                UiUtils.printInvalidAction();
                 break;
         }
     }
@@ -92,10 +107,7 @@ public class BankManagerSession {
 
         while (isManagerSession) {
             displayManagerActionList();
-
-            System.out.println("Enter action: ");
-            int action = scanner.nextInt();
-            System.out.println();
+            int action = UiUtils.getIntInput(scanner, "Enter action: ");
 
             switch (action) {
                 case 1:
@@ -107,6 +119,7 @@ public class BankManagerSession {
                     break;
             
                 case 2:
+                    UiUtils.printDivider();
                     accountManager.listAccounts();
                     break;
 
@@ -116,11 +129,11 @@ public class BankManagerSession {
 
                 case 4:
                     isManagerSession = false;
-                    System.out.println("Logged out from Manager Mode.\n");
+                    UiUtils.printLogout();
                     break;
 
                 default:
-                    System.out.println("Invalid option. Try again.\n");
+                    UiUtils.printInvalidAction();
                     break;
             }
         }

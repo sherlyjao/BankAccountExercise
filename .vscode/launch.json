@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "App",
+            "projectName": "BankAccountExercise_abedc326"
+        },
+        {
+            "type": "java",
             "name": "Atm",
             "request": "launch",
             "mainClass": "Atm",

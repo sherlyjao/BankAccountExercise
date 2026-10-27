@@ -8,6 +8,7 @@ import bank.Transaction;
 import bank.exceptions.AccountFrozenException;
 import bank.exceptions.InsufficientFundsException;
 import bank.exceptions.InvalidAmountException;
+import bank.ui.UiUtils;
 
 public class UserAtmSession {
     private final Scanner scanner;
@@ -19,23 +20,20 @@ public class UserAtmSession {
     }
 
     public void displayUserAccount() {
-        System.out.println();
-        System.out.println("================================");
-        System.out.println("Account: " + ((SavingsAccount) account).getOwnerName());
-        System.out.println("================================");
-        System.out.println();
+        UiUtils.printHeader("Account " 
+            + ((SavingsAccount) account).getOwnerName());
     }
 
     public void displayUserActionList() {
         System.out.println("\nActions: \n(1) Deposit\n(2) Withdraw\n(3) "
                 + (account.isFrozen() ? "Unfreeze" : "Freeze")
                 + "\n(4) Check Balance\n(5) Get Transaction History\n(6) Logout");
-        System.out.println("--------------------------------");
+        UiUtils.printDivider();
     }
 
     public double userActionInput(String action) {
-        System.out.print("Enter " + action + " amount: ");
-        return scanner.nextDouble();
+        return UiUtils.getDoubleInput(scanner, 
+            "Enter " + action + " amount: ");
     }
 
     public void start() {
@@ -45,9 +43,7 @@ public class UserAtmSession {
         while (isUserSession) {
             displayUserActionList();
 
-            System.out.println("Enter action: ");
-            int action = scanner.nextInt();
-            System.out.println();
+            int action = UiUtils.getIntInput(scanner, "Enter action: ");
 
             switch (action) {
                 case 1:
@@ -55,7 +51,8 @@ public class UserAtmSession {
                         double depositAmount = userActionInput("deposit");
                         System.out.println();
                         account.deposit(depositAmount);
-                    } catch (AccountFrozenException | InvalidAmountException e) {
+                    } catch (AccountFrozenException 
+                            | InvalidAmountException e) {
                         System.out.println(e.getMessage());
                     }
 
@@ -66,7 +63,9 @@ public class UserAtmSession {
                         double withdrawAmount = userActionInput("withdrawal");
                         System.out.println();
                         account.withdraw(withdrawAmount);
-                    } catch (AccountFrozenException | InvalidAmountException | InsufficientFundsException e) {
+                    } catch (AccountFrozenException
+                            | InvalidAmountException
+                            | InsufficientFundsException e) {
                         System.out.println(e.getMessage());
                     }
 
@@ -79,12 +78,14 @@ public class UserAtmSession {
                         account.freezeAccount();
                     }
 
-                    System.out.println("Account is now " + (account.isFrozen() ? "FROZEN" : "UNFROZEN"));
+                    System.out.println("Account is now " 
+                        + (account.isFrozen() ? "FROZEN" : "UNFROZEN"));
                     
                     break;
 
                 case 4:
-                    System.out.println("Sample Account: " + ((SavingsAccount) account).getOwnerName());
+                    System.out.println("Sample Account: " 
+                        + ((SavingsAccount) account).getOwnerName());
                     account.printBalance();
                     break;
 
@@ -94,11 +95,11 @@ public class UserAtmSession {
 
                 case 6:
                     isUserSession = false;
-                    System.out.println("\nLogging out of account!");
+                    UiUtils.printLogout();
                     break;
 
                 default:
-                    System.out.println("\nInvalid action. Please try again.");
+                    UiUtils.printInvalidAction();
                     break;            
             }
         }
