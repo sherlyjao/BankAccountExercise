@@ -26,7 +26,9 @@ public class UserAtmSession {
     public void displayUserActionList() {
         System.out.println("\nActions: \n(1) Deposit\n(2) Withdraw\n(3) "
                 + (account.isFrozen() ? "Unfreeze" : "Freeze")
-                + "\n(4) Check Balance\n(5) Get Transaction History\n(6) Logout");
+                + "\n(4) Check Balance"
+                + "\n(5) Get Transaction History"
+                + "\n(6) Logout");
         UiUtils.printDivider();
     }
 
